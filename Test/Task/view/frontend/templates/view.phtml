@@ -1,0 +1,220 @@
+<?php
+/** @var Test\Task\Block\Product $block
+ */ ?>
+<?php //$productCollection = $block->getProductById(50)->getData(); ?>
+<?php
+$Count_Product=$block->getCountProduct();
+$pic_number=(time()%($Count_Product))+1;
+$product=$block->getProductById($pic_number);
+$productCollection = $block->getProductById($pic_number)->getData();
+//$cartHelper = $block->makeCartNew($productCollection['entity_id'],$productCollection['url_key'] );
+$url_new=$block->MakeCartNew2($product);
+//dd($url_new);
+//foreach ($cartHelper as $key => $value)
+//{
+//    dd($key);
+//    if ($key='url')
+//        $result_url=$value;
+//}
+//dd($result_url);
+//dd($productCollection);
+//echo $pic_number;
+//dd($productCollection);
+//if (count($productCollection)){
+//echo  $post->getValue();
+//    echo "Jamal Azizbeygi Boukani";
+//    dd($productCollection);
+//}
+ ?>
+
+<div class="column main">
+    <div class="product-info-main">
+        <div class="page-title-wrapper product">
+            <h1 class="page-title">
+                <span class="base" data-ui-id="page-title-wrapper" itemprop="name"><?php echo $productCollection['name']; ?></span>
+            </h1>
+        </div>
+        <div class="product-reviews-summary" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+            <div class="rating-summary">
+                <span class="label"><span>Rating:</span></span>
+                <div class="rating-result" id="rating-result_<?php echo $productCollection['entity_id']; ?>" title="50%">
+                 <span style="width: 50%;">
+                     <span>
+                         <span itemprop="ratingValue">50                         </span>% of <span itemprop="bestRating">100</span>
+                     </span>
+                 </span>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var elem32TNcaJE = document.querySelector('#rating-result_<?php echo $productCollection['entity_id']; ?> span');
+                if (elem32TNcaJE) {
+                    elem32TNcaJE.style.width = '50%';
+                }
+            </script>
+            <div class="reviews-actions">
+                <a class="action view" href="http://learn.magento2.com:8080/<?php echo $productCollection['url_key']; ?>.html#reviews">
+                    <span itemprop="reviewCount">2</span>&nbsp;
+                    <span>Reviews                </span>
+                </a>
+                <a class="action add" href="http://learn.magento2.com:8080/<?php echo $productCollection['url_key']; ?>.html#review-form">
+                    Add Your Review            </a>
+            </div>
+        </div>
+        <div class="product-info-price"><div class="price-box price-final_price" data-role="priceBox" data-product-id="<?php echo $productCollection['entity_id']; ?>" data-price-box="product-id-<?php echo $productCollection['entity_id']; ?>">
+
+
+<span class="price-container price-final_price tax weee" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+        <span id="product-price-<?php echo $productCollection['entity_id']; ?>" data-price-amount="<?php echo substr($productCollection['price'], 0, 5); ?>" data-price-type="finalPrice" class="price-wrapper "><span class="price">$<?php echo substr($productCollection['price'], 0, 5); ?></span></span>
+                <meta itemprop="price" content="<?php echo substr($productCollection['price'], 0, 3); ?>">
+        <meta itemprop="priceCurrency" content="USD">
+    </span>
+
+            </div><div class="product-info-stock-sku">
+                <div class="stock available" title="Availability">
+                    <span>In stock</span>
+                </div>
+
+                <div class="product attribute sku">
+                    <strong class="type">SKU</strong>
+                    <div class="value" itemprop="sku"><?php echo $productCollection['sku']; ?></div>
+                </div>
+            </div></div>
+
+        <div class="product-add-form">
+            <form data-product-sku="<?php echo $productCollection['sku']; ?>"
+                  action="<?php echo $url_new; ?>/"
+                  method="post" id="product_addtocart_form" novalidate="novalidate">
+                <input type="hidden" name="product" value="<?php echo $productCollection['entity_id']; ?>">
+                <input type="hidden" name="selected_configurable_option" value="">
+                <input type="hidden" name="related_product" id="related-products-field" value="">
+                <input type="hidden" name="item" value="<?php echo $productCollection['entity_id']; ?>">
+                <input name="form_key" type="hidden" value="v3CrU4a81LZTQNNm">
+                <?php echo $block->getBlockHtml('formkey')?>
+                <div class="box-tocart">
+                    <div class="fieldset">
+                        <div class="field qty">
+                            <label class="label" for="qty"><span>Qty</span></label>
+                            <div class="control">
+                                <input type="number" name="qty" id="qty" min="0" value="1" title="Qty" class="input-text qty" data-validate="{&quot;required-number&quot;:true,&quot;validate-item-quantity&quot;:{&quot;minAllowed&quot;:1,&quot;maxAllowed&quot;:10000}}">
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <button type="submit" title="Buy" class="action primary tocart" id="product-addtocart-button">
+                                <span>Buy</span>
+                            </button>
+
+                            <div id="instant-purchase" data-bind="scope:'instant-purchase'">
+                                <!-- ko template: getTemplate() -->
+                                <!-- ko if: showButton() --><!-- /ko -->
+                                <!-- /ko -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+
+
+    </div>
+    <div class="product media">
+        <a id="gallery-prev-area" tabindex="-1"></a>
+
+
+        <div class="gallery-placeholder" data-gallery-role="gallery-placeholder" style="">
+
+            <!--
+            /**
+             * Copyright © Magento, Inc. All rights reserved.
+             * See COPYING.txt for license details.
+             */
+            -->
+            <div class="fotorama--hidden"></div>
+            <style></style><div class="fotorama-item fotorama fotorama1677586066776" data-gallery-role="gallery">
+                <div data-gallery-role="fotorama__focusable-start" tabindex="-1"></div>
+                <div class="fotorama__wrap fotorama__wrap--css3 fotorama__wrap--slide fotorama__wrap--toggle-arrows fotorama__wrap--no-controls" style="min-width: 0px; max-width: 100%;">
+                    <div class="fotorama__stage" data-fotorama-stage="fotorama__stage" style="height: 664px; width: 664px;">
+                        <div class="fotorama__fullscreen-icon" data-gallery-role="fotorama__fullscreen-icon" tabindex="0" aria-label="Exit fullscreen" role="button"></div>
+                        <div class="fotorama__arr fotorama__arr--prev fotorama__arr--disabled" tabindex="-1" role="button" aria-label="Previous" data-gallery-role="arrow" disabled="disabled" style="display: none;">
+                            <div class="fotorama__arr__arr"></div>
+                        </div>
+                        <div class="fotorama__stage__shaft" tabindex="0" data-gallery-role="stage-shaft" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px); margin-left: 0px; width: 663.925px;">
+                            <div class="fotorama__stage__frame fotorama__active fotorama_vertical_ratio fotorama__loaded fotorama__loaded--img" aria-hidden="false" data-active="true" href="http://learn.magento2.com:8080/media/catalog/product\cache\45106848e0d651628ec998b85f7f8663\/"><img src="http://learn.magento2.com:8080/media/catalog/product\cache\45106848e0d651628ec998b85f7f8663\/<?php echo $productCollection['image']; ?>" alt="Image" class="fotorama__img" aria-hidden="false"></div></div>
+                        <div class="fotorama__arr fotorama__arr--next fotorama__arr--disabled" tabindex="-1" role="button" aria-label="Next" data-gallery-role="arrow" disabled="disabled" style="display: none;">
+                            <div class="fotorama__arr__arr"></div>
+                        </div>
+                        <div class="fotorama__video-close"></div>
+                        <div class="fotorama__zoom-in zoom-in-loaded" data-gallery-role="fotorama__zoom-in" aria-label="Zoom in" role="button" tabindex="0"></div>
+                        <div class="fotorama__zoom-out zoom-out-loaded" data-gallery-role="fotorama__zoom-out" aria-label="Zoom out" role="button" tabindex="0"></div>
+                        <div class="fotorama__spinner"></div>
+                    </div>
+                    <div class="fotorama__nav-wrap" data-gallery-role="nav-wrap" style="display: none;">
+                        <div class="fotorama__nav" style="height: 114px;">
+
+                            <div class="fotorama__thumb__arr fotorama__thumb__arr--left fotorama__arr--disabled" role="button" aria-label="Previous" data-gallery-role="arrow" tabindex="-1" disabled="disabled">
+                                <div class="fotorama__thumb--icon"></div>
+                            </div>
+                            <div class="fotorama__nav__shaft fotorama__grab">
+                                <div class="fotorama__thumb-border"></div>
+                            </div>
+                            <div class="fotorama__thumb__arr fotorama__thumb__arr--right" role="button" aria-label="Next" data-gallery-role="arrow" tabindex="-1">
+                                <div class="fotorama__thumb--icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-gallery-role="fotorama__focusable-end" tabindex="-1"></div>
+            </div>
+            <div class="magnifier-preview magnify-hidden" data-gallery-role="magnifier" id="preview" style="display: none;"></div>
+        </div>
+
+
+
+        <div class="action-skip-wrapper"><a class="action skip gallery-prev-area" href="#gallery-prev-area">
+    <span>
+        Skip to the beginning of the images gallery    </span>
+            </a>
+        </div><a id="gallery-next-area" tabindex="-1"></a>
+    </div>    <div class="product info detailed">
+        <div class="product data items mage-tabs-disabled" role="tablist">
+            <div class="data item title active" data-role="collapsible" id="tab-label-description" role="tab" data-collapsible="true" aria-controls="description" aria-selected="false" aria-expanded="true" tabindex="0">
+                <a class="data switch" tabindex="-1" data-toggle="trigger" href="#description" id="tab-label-description-title">
+                    Details                    </a>
+            </div>
+            <div class="data item content" aria-labelledby="tab-label-description" id="description" data-role="content" role="tabpanel" aria-hidden="false">
+
+                <div class="product attribute description">
+                    <div class="value">
+                        <?php echo $productCollection['description']; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script data-role="msrp-popup-template" type="text/x-magento-template">
+        <div id="map-popup-click-for-price" class="map-popup">
+            <div class="popup-header">
+                <strong class="title" id="map-popup-heading-price"></strong>
+            </div>
+            <div class="popup-content">
+                <div class="map-info-price" id="map-popup-content">
+                    <div class="price-box">
+                        <div class="map-msrp" id="map-popup-msrp-box">
+                            <span class="label">Price</span>
+                            <span class="old-price map-old-price" id="map-popup-msrp">
+                            <span class="price"></span>
+                        </span>
+                        </div>
+                        <div class="map-price" id="map-popup-price-box">
+                            <span class="label">Actual Price</span>
+                            <span id="map-popup-price" class="actual-price"></span>
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+    </script>
+</div>
